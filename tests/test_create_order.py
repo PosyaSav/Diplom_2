@@ -40,3 +40,10 @@ class TestCreateOrder:
         response_create_order = requests.post(Url.CREATE_ORDER, data=payload_create_order)
 
         assert 500 == response_create_order.status_code
+
+    @allure.title('Тест создания заказа без ингредиентов')
+    def test_create_order_without_ingr(self):
+        response_create_order = requests.post(Url.CREATE_ORDER, data={'ingredients': ""})
+
+        assert 400 == response_create_order.status_code
+        assert not response_create_order.json()['success']

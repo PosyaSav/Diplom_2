@@ -1,5 +1,6 @@
 import random
 from faker import Faker
+import allure
 import requests
 from data import Url
 
@@ -17,6 +18,7 @@ def password():
     generated_password = fake.password(length=10, special_chars=False, digits=True, upper_case=True, lower_case=True)
     return generated_password
 
+@allure.step('Метод для генерации данных пользователя')
 def payload_create_user():
     """Метод для генерации данных пользователя"""
     payload = {
@@ -26,6 +28,7 @@ def payload_create_user():
     }
     return payload
 
+@allure.step('Метод для генерации данных заказа')
 def payload_order():
     response_ingr = requests.get(Url.GET_INGREDIENTS)
     data = response_ingr.json()
